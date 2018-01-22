@@ -1,0 +1,27 @@
+{
+    "name": "thebestwords",
+    "version": "0.1.0",
+    "description": "tbw",
+    "main": "app.js",
+    "dependencies": {
+        "config": "^1.29.1",
+        "cors": "^2.8.4",
+        "cowsay": "^1.2.1",
+        "express": "^4.16.2",
+        "express-healthcheck": "^0.1.0",
+        "for-async": "^1.0.1",
+        "moment": "^2.20.1",
+        "node-cron": "^1.2.1",
+        "s3": "^4.4.0",
+        "showdown": "^1.8.6",
+        "snoowrap": "^1.15.2",
+        "twitter": "^1.7.1",
+        "twitter-url-parser": "0.0.1",
+        "write": "^1.0.3"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "start": "node app.js"
+    },
+    "author": "GammaGames"
+}

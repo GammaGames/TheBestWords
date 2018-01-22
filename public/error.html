@@ -1,0 +1,222 @@
+<html>
+
+	<head>
+		<title>ERROR</title>
+		<meta http-equiv="refresh" content="10;url=http://www.thebestwords.io/" />
+
+		<!-- SOURCE: http://codepen.io/lbebber/pen/ypgql -->
+
+	<style>
+		body {
+            background: #171717;
+            font-family: 'Varela', sans-serif;
+            text-align: center;
+		}
+
+		.container{
+            position: relative;
+            top: 50%;
+            transform: translateY(-60%);
+		}
+
+		.glitch {
+            color: white;
+            font-size: 100px;
+            position: relative;
+            width: 175px;
+            margin: 0 auto;
+		}
+
+		@keyframes noise-anim {
+            0% {
+                clip: rect(48px, 9999px, 75px, 0);
+            }
+            5% {
+                clip: rect(47px, 9999px, 3px, 0);
+            }
+            10% {
+                clip: rect(61px, 9999px, 87px, 0);
+            }
+            15.0% {
+                clip: rect(97px, 9999px, 73px, 0);
+            }
+            20% {
+                clip: rect(44px, 9999px, 89px, 0);
+            }
+            25% {
+                clip: rect(77px, 9999px, 11px, 0);
+            }
+            30.0% {
+                clip: rect(41px, 9999px, 4px, 0);
+            }
+            35% {
+                clip: rect(23px, 9999px, 89px, 0);
+            }
+            40% {
+                clip: rect(29px, 9999px, 28px, 0);
+            }
+            45% {
+                clip: rect(61px, 9999px, 16px, 0);
+            }
+            50% {
+                clip: rect(12px, 9999px, 79px, 0);
+            }
+            55.0% {
+                clip: rect(12px, 9999px, 86px, 0);
+            }
+            60.0% {
+                clip: rect(31px, 9999px, 36px, 0);
+            }
+            65% {
+                clip: rect(37px, 9999px, 32px, 0);
+            }
+            70% {
+                clip: rect(77px, 9999px, 34px, 0);
+            }
+            75% {
+                clip: rect(61px, 9999px, 32px, 0);
+            }
+            80% {
+                clip: rect(69px, 9999px, 52px, 0);
+            }
+            85.0% {
+                clip: rect(47px, 9999px, 53px, 0);
+            }
+            90% {
+                clip: rect(91px, 9999px, 4px, 0);
+            }
+            95% {
+                clip: rect(91px, 9999px, 69px, 0);
+            }
+            100% {
+                clip: rect(52px, 9999px, 7px, 0);
+            }
+		}
+		.glitch:after {
+            content: attr(data-text);
+            position: absolute;
+            left: 2px;
+            text-shadow: -1px 0 red;
+            top: 0;
+            color: white;
+            background: #171717;
+            overflow: hidden;
+            clip: rect(0, 900px, 0, 0);
+            animation: noise-anim 2s infinite linear alternate-reverse;
+		}
+
+		@keyframes noise-anim-2 {
+            0% {
+                clip: rect(77px, 9999px, 55px, 0);
+            }
+            5% {
+                clip: rect(42px, 9999px, 74px, 0);
+            }
+            10% {
+                clip: rect(90px, 9999px, 28px, 0);
+            }
+            15.0% {
+                clip: rect(2px, 9999px, 92px, 0);
+            }
+            20% {
+                clip: rect(35px, 9999px, 78px, 0);
+            }
+            25% {
+                clip: rect(76px, 9999px, 76px, 0);
+            }
+            30.0% {
+                clip: rect(26px, 9999px, 70px, 0);
+            }
+            35% {
+                clip: rect(65px, 9999px, 62px, 0);
+            }
+            40% {
+                clip: rect(52px, 9999px, 68px, 0);
+            }
+            45% {
+                clip: rect(12px, 9999px, 45px, 0);
+            }
+            50% {
+                clip: rect(62px, 9999px, 25px, 0);
+            }
+            55.0% {
+                clip: rect(54px, 9999px, 30px, 0);
+            }
+            60.0% {
+                clip: rect(44px, 9999px, 16px, 0);
+            }
+            65% {
+                clip: rect(74px, 9999px, 93px, 0);
+            }
+            70% {
+                clip: rect(76px, 9999px, 94px, 0);
+            }
+            75% {
+                clip: rect(73px, 9999px, 93px, 0);
+            }
+            80% {
+                clip: rect(8px, 9999px, 25px, 0);
+            }
+            85.0% {
+                clip: rect(100px, 9999px, 44px, 0);
+            }
+            90% {
+                clip: rect(94px, 9999px, 32px, 0);
+            }
+            95% {
+                clip: rect(56px, 9999px, 53px, 0);
+            }
+            100% {
+                clip: rect(23px, 9999px, 12px, 0);
+            }
+		}
+		.glitch:before {
+            content: attr(data-text);
+            position: absolute;
+            left: -2px;
+            text-shadow: 1px 0 blue;
+            top: 0;
+            color: white;
+            background: #171717;
+            overflow: hidden;
+            clip: rect(0, 900px, 0, 0);
+            animation: noise-anim-2 3s infinite linear alternate-reverse;
+		}
+
+		#crack {
+			font: 10px/5px monospace;
+			position: absolute;
+			left: -100px;
+			top: 0px;
+			width:100%;
+			margin: 0px 20px 0 auto;
+			color: #e7e9ea;
+			z-index:0;
+		}
+
+		p {
+			font-size: 25px;
+			margin: 0 0 10px 0;
+			color: #e7e9ea;
+			text-shadow: 1px 1px 0px #000000;
+		}
+
+		#ret {
+			z-index:100;
+		}
+	</style>
+	<script src="/prefixfree.min.js"></script>
+	</head>
+
+	<body>
+
+	    <link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
+
+		<div class=container>
+			<div class="glitch" data-text="404">404</div>
+			</br>
+			<p >You fucked something up. Or I did.</p>
+			<p>Either way, returning home now.</p>
+		</div>
+	</body>
+	</html>

@@ -1,0 +1,195 @@
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>The Best Words</title>
+        <meta name="description" content="The best words.">
+        <meta name="author" content="GammaGames">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
+
+        <link rel="stylesheet" href="css/style.css"></link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+        <link href="css/libs/jquery.booklet.latest.css" type="text/css" rel="stylesheet" media="screen, projection, tv" />
+        <link href="https://fonts.googleapis.com/css?family=Alegreya|Alegreya+Sans|Alegreya+Sans+SC|IM+Fell+French+Canon|Open+Sans" rel="stylesheet">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <script src="js/libs/jquery.booklet.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone-min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+        <script src="js/libs/hammerjquery.js"></script>
+
+    </head>
+    <body>
+        <div class="ui basic segment" id="main">
+        </div>
+
+        <div id="about_modal_container">
+        </div>
+
+        <!-- Templates -->
+        <!--//==============================================================================-->
+        <!--TEMPLATE NAME-->
+        <script type="text/template" id="start_template">
+            <div class="ui middle aligned centered fullscreen grid">
+                <div class="ui active dimmer" id="page_loader">
+                    <div class="ui text loader">Loading</div>
+                </div>
+                <div id="book_wrapper">
+                </div>
+
+                <div class="row">
+                    <div class="middle aligned column">
+                        <div class="ui compact secondary menu">
+                            <div class="item" id="left_button"><i class="big left chevron icon"></i></div>
+                            <div class="item" id="about_button"><i class="large help icon"></i></div>
+                            <div class="item">
+                                <div class="ui transition bottom right pointing icon dropdown" id="bookmark_button">
+                                    <i class="large bookmark icon"></i>
+                                    <div class="menu">
+                                        <a href="#hot" class="item">🔥 Hot</a>
+                                        <div class="item">
+                                            <i class="dropdown icon"></i>
+                                            <span class="text">⭐ Top</span>
+                                            <div class="menu">
+                                            <a href="#top/all" class="item">All</a>
+                                            <a href="#top/year" class="item">Year</a>
+                                            <a href="#top/month" class="item">Month</a>
+                                            <a href="#top/week" class="item">Week</a>
+                                            </div>
+                                        </div>
+                                        <a href="#new" class="item">🕒 New</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item" id="right_button"><i class="big right chevron icon"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </spa>
+        </script>
+
+        <script type="text/template" id="book_template">
+            <div id="book">
+                <div class="row">
+                </div>
+                <div class="row">
+                    <div class="middle aligned column page">
+                        <div class="ui fluid middle aligned grid cover">
+                            <div class="row"></div>
+                            <div class="row">
+                                <div class="column">
+                                    <span class="title"><span class="small">The</span> <br> Best Words</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="column">
+                                    <span class="author">Donald J Trump</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/template" id="page_template">
+            <div class="<%= submission.id %>"></div>
+            <div class="row <%= submission.id %>">
+                <div class="middle aligned column page">
+                    <div class="ui fluid grid page">
+                        <div class="middle aligned row">
+                            <div class="fluid column">
+                                <div class="quote">
+                                    <div class="text">
+                                        <i class="small left quote icon"></i><%= submission.tweet.full_text %>"
+                                    </div>
+                                    <div class="author">
+                                        &ndash;<a href="<%= submission.url %>" target="_blank">@<%= submission.tweet.user.screen_name %> <i class="twitter icon"></i></a>
+                                    </div>
+                                    <div class="date">
+                                        <%= moment(submission.tweet.created_at, 'dd MMM DD HH:mm:ss ZZ YYYY', 'en').format("MMMM Do, YYYY") %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="fluid column">
+                                <div class="context">
+                                    <div class="text_wrapper">
+                                        <div class="text">
+                                            <% _.each(submission.comments, function(comment) { %>
+                                                <%= comment.body %>
+                                            <% }) %>
+                                        </div>
+                                    </div>
+                                    <div class="author">
+                                        &ndash;<a href="http://reddit.com<%= submission.permalink %>" target="_blank">/u/<%= submission.username %> <i class="reddit alien icon"></i></a>
+                                    </div>
+                                    <div class="date">
+                                        <%= moment.unix(submission.created_utc).format("MMMM Do, YYYY") %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="page number">
+                        <i class="tiny snowflake icon"></i>
+                        <%= index %>
+                    </span>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/template" id="about_modal_template">
+            <div class="ui basic small modal" id="about_modal">
+                <div class="ui icon header">
+                    <i class="book icon"></i>
+                    About
+                </div>
+                <div class="content">
+                    This is a satirical site to highlight the deceiving and ignorant cesspool that is @realDonaldTrump. Special thanks to <a href="https://www.reddit.com/r/AskReddit/comments/7oll53/if_we_put_all_of_d_trumps_tweets_into_a_book_what/dsaegh8/" target="_blank">/u/somepeoplewait and /u/8moves</a> for the idea!
+                    <br>
+                    The posts are pulled from <a href="https://reddit.com/r/TrumpCriticizesTrump" target="_blank">r/TrumpCriticizesTrump <i class="reddit alien icon"></i></a>, which provide a tweet with context to explain the hypocrisy.
+                    <br>
+                    If you would like to see the book cover closer, <a href="http://thebestwords.io/img/cover_uncompressed.png" target="_blank">here is a link</a>. It's my personal favorite quote to hate.
+                    <br>
+                    <br>
+                    You can follow me on twitter as <a href="https://twitter.com/gammagames" target="_blank">@GammaGames <i class="twitter icon"></i></a> if you'd like, and the github repo is available <a href="https://github.com/GammaGames/TheBestWords" target="_blank">here <i class="github icon"></i></a>.
+                    <div id="cow_wrapper">
+                        <pre><%= cow %></pre>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+        <!-- Models -->
+        <script src="js/models.js"></script>
+
+        <!-- Collections -->
+        <script src="js/collections.js"></script>
+
+        <!-- Views -->
+        <script src="js/views/start.js"></script>
+        <script src="js/views/about.js"></script>
+        <script src="js/views/book.js"></script>
+        <script src="js/views/page.js"></script>
+
+        <!-- Router -->
+        <script src="js/router.js"></script>
+
+        <!-- App -->
+        <script>
+            $(function(){
+                server = "http://api.thebestwords.io/";
+                router = new tbw.Router.Router();
+                Backbone.history.start();
+            });
+		</script>
+
+    </body>
+</html>

@@ -1,0 +1,19 @@
+{
+    "reddit": {
+        "userAgent": "userAgent",
+        "clientId": "clientId",
+        "clientSecret": "clientSecret",
+        "refreshToken": "refreshToken"
+    },
+    "twitter": {
+        "consumer_key": "consumer_key",
+        "consumer_secret": "consumer_secret",
+        "access_token_key": "access_token_key",
+        "access_token_secret": "access_token_secret",
+        "bearer_token": "bearer_token"
+    },
+    "aws": {
+        "accessKeyId": "accessKeyId",
+        "secretAccessKey": "secretAccessKey"
+    }
+}
