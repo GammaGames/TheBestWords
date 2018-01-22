@@ -1,3 +1,4 @@
+[
 ```
  _____ _       _____         _   _ _ _           _       _
 |_   _| |_ ___| __  |___ ___| |_| | | |___ ___ _| |___  |_|___
@@ -13,7 +14,7 @@ Easily see trump's hypocrisy in a book style featuring posts taken from [/r/trum
 
 Frontend:
 ======
-thebestwords.io
+[thebestwords.io](http://thebestwords.io)
 ------
 (Public folder) A client side application using jquery, booklet, moment, semantic ui, 
 underscore, backbone, and hammer hosted on and aws s3 bucket
@@ -27,7 +28,7 @@ underscore, backbone, and hammer hosted on and aws s3 bucket
 
 Servers:
 ======
-api.thebestwords.io
+[api.thebestwords.io](http://api.thebestwords.io)
 ------
 (server folder) A nodejs server hosted on amazon aws elastic beanstalk. Downloads a new cache from an s3 bucket 15 minutes and serves those json files
 
