@@ -53,5 +53,6 @@ tbw.Router.Router = Backbone.Router.extend({
 
     defaultRoute: function() {
         console.log("Route not handled!");
+        router.navigate("", {trigger: true});
     },
 });

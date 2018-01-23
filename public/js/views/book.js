@@ -14,6 +14,7 @@ tbw.Views.Book = Backbone.View.extend({
 
     initialize: function() {
         this.subViews = [];
+        this.index = 0;
         this.collection = new tbw.Collections.Submissions();
         this.listenTo(this.collection, "sync", this.render);
     },
@@ -42,11 +43,18 @@ tbw.Views.Book = Backbone.View.extend({
             change: function(event, data){
                 $("#left_button").removeClass("disabled");
                 $("#right_button").removeClass("disabled");
-                if(Math.floor(data.index) / 2 == 0) {
+                var index = Math.floor(data.index) / 2;
+                that.index = index;
+                if(index == 0) {
+                    $("#share_button").addClass("disabled");
                     $("#left_button").addClass("disabled");
                 }
-                else if(Math.floor(data.index) / 2 == that.collection.length){
+                else if(index == that.collection.length){
                     $("#right_button").addClass("disabled");
+                }
+
+                if(index > 0) {
+                    $("#share_button").removeClass("disabled");
                 }
             }
         });
@@ -62,6 +70,7 @@ tbw.Views.Book = Backbone.View.extend({
             that.subViews[submission.id].remove();
         });
         this.subViews = [];
+        this.index = 0;
     },
 
     closeBook: function() {
@@ -69,16 +78,41 @@ tbw.Views.Book = Backbone.View.extend({
         $("#left_button").addClass("disabled");
     },
 
+    getPage: function(id) {
+        var that = this;
+        this.closeBook();
+        setTimeout(function() {
+            that.removeSubViews();
+        }, 750);
+        setTimeout(function() {
+            $("#page_loader").addClass("active");
+            var model;
+            if(this.collection) {
+                while (model = this.collection.first()) {
+                    model.destroy();
+                }
+            }
+
+            model = new tbw.Models.Submission({id: id});
+            model.fetch({reset: true});
+            that.listenTo(model, "sync", function() {
+                that.collection.add(model);
+                that.render();
+                $("#book").booklet("gotopage", 2);
+            });
+        }, 250);
+    },
+
     getHot: function() {
         var that = this;
         this.closeBook();
         setTimeout(function() {
             that.removeSubViews();
-        }, 1000);
+        }, 750);
         setTimeout(function() {
             $("#page_loader").addClass("active");
             that.collection.getHot();
-        }, 1000);
+        }, 750);
     },
 
     getTop: function(time) {
@@ -86,11 +120,11 @@ tbw.Views.Book = Backbone.View.extend({
         this.closeBook();
         setTimeout(function() {
             that.removeSubViews();
-        }, 1000);
+        }, 750);
         setTimeout(function() {
             $("#page_loader").addClass("active");
             that.collection.getTop(time);
-        }, 1000);
+        }, 750);
     },
 
     getNew: function() {
@@ -98,11 +132,11 @@ tbw.Views.Book = Backbone.View.extend({
         this.closeBook();
         setTimeout(function() {
             that.removeSubViews();
-        }, 1000);
+        }, 750);
         setTimeout(function() {
             $("#page_loader").addClass("active");
             that.collection.getNew();
-        }, 1000);
+        }, 750);
     },
 
     next: function() {

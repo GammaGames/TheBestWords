@@ -24,6 +24,14 @@ tbw.Models.Submission = Backbone.Model.extend({
         title: null,
         num_comments: null,
         comments: []
+    },
+
+    initialize: function(options) {
+        this.set("id", options.id);
+    },
+
+    url: function() {
+        return "http://api.thebestwords.io/post/" + this.get("id");
     }
 });
 

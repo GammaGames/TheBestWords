@@ -31,7 +31,7 @@ module.exports = function(app) {
         next('route');
     });
 
-    app.get('/post/:id', (req, res) => {
+    app.get('/post/:id', cors(corsOptions), (req, res) => {
         var id = req.params.id || "week";
         var submission = reddit.getSubmission(id, function(data) {
             res.setHeader('Access-Control-Allow-Credentials', true);

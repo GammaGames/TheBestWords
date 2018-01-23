@@ -13,6 +13,7 @@
         <link href="https://fonts.googleapis.com/css?family=Alegreya|Alegreya+Sans|Alegreya+Sans+SC|IM+Fell+French+Canon|Open+Sans" rel="stylesheet">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
         <script src="js/libs/jquery.booklet.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
@@ -28,8 +29,8 @@
         <div class="ui basic segment" id="main">
         </div>
 
-        <div id="about_modal_container">
-        </div>
+        <div id="about_modal_container"></div>
+        <div id="share_modal_container"></div>
 
         <!-- Templates -->
         <!--//==============================================================================-->
@@ -47,6 +48,7 @@
                         <div class="ui compact secondary menu">
                             <div class="item" id="left_button"><i class="big left chevron icon"></i></div>
                             <div class="item" id="about_button"><i class="large help icon"></i></div>
+                            <div class="disabled item" id="share_button"><i class="large external share icon"></i></div>
                             <div class="item">
                                 <div class="ui transition bottom right pointing icon dropdown" id="bookmark_button">
                                     <i class="large bookmark icon"></i>
@@ -167,6 +169,26 @@
             </div>
         </script>
 
+        <script type="text/template" id="share_modal_template">
+            <div class="ui tiny modal" id="share_modal">
+                <i class="close icon"></i>
+                <div class="ui icon header">
+                    <i class="external share icon"></i>
+                    Share page
+                </div>
+                <div class="content">
+                    You can copy the link below to link directly to this tweet and post :)
+                    <div class="ui right action fluid input">
+                        <input class="text" id="share_link" value="http://thebestwords.io#page/<%= id %>">
+                        <a class="ui labeled icon button" id="copy_button" data-clipboard-target="#share_link" data-content="Link copied!">
+                            <i class="copy icon"></i>
+                            Copy
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </script>
+
         <!-- Models -->
         <script src="js/models.js"></script>
 
@@ -176,6 +198,7 @@
         <!-- Views -->
         <script src="js/views/start.js"></script>
         <script src="js/views/about.js"></script>
+        <script src="js/views/share.js"></script>
         <script src="js/views/book.js"></script>
         <script src="js/views/page.js"></script>
 

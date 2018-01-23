@@ -15,6 +15,9 @@ tbw.Views.Start = Backbone.View.extend({
         "mouseenter #about_button": "aboutButton",
         "mouseleave #about_button": "aboutButton",
         "click #about_button": "aboutModal",
+        "mouseenter #share_button:not(.disabled)": "shareButton",
+        "mouseleave #share_button:not(.disabled)": "shareButton",
+        "click #share_button:not(.disabled)": "shareModal",
         "mouseenter #bookmark_button": "bookmarkButton",
         "mouseleave #bookmark_button": "bookmarkButton",
         "mouseenter #right_button, #left_button": "pageButtons",
@@ -75,6 +78,15 @@ tbw.Views.Start = Backbone.View.extend({
         }
     },
 
+    shareButton: function(e) {
+        if(e.type == "mouseenter") {
+            $(e.currentTarget).find(".icon").first().addClass("green");
+        }
+        else {
+            $(e.currentTarget).find(".icon").first().removeClass("green");
+        }
+    },
+
     bookmarkButton: function(e) {
         if(e.type == "mouseenter") {
             $(e.currentTarget).find(".icon").first().addClass("red");
@@ -98,5 +110,13 @@ tbw.Views.Start = Backbone.View.extend({
             this.subViews["about"].remove();
         }
         this.subViews["about"] = new tbw.Views.About();
+    },
+
+    shareModal: function() {
+        if(this.subViews["share"]) {
+            this.subViews["share"].remove();
+        }
+        var pageIndex = this.subViews["book"].index;
+        this.subViews["share"] = new tbw.Views.Share({id: this.subViews["book"].collection.at(pageIndex - 1).get("id")});
     }
 });

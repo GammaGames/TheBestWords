@@ -19,7 +19,7 @@ tbw.Views.About = Backbone.View.extend({
             });
         }
         else {
-            this.render()
+            this.render();
         }
     },
 
