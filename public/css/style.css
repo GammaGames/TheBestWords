@@ -156,7 +156,12 @@ body ::-webkit-scrollbar {
     -o-transform: rotate(47deg) skew(5deg);
     -webkit-transform: rotate(47deg) skew(5deg);
     box-shadow: 2px 2px 2px 0 rgba( 178, 178, 178, .4 );
+}
+.quote .text::before {
     right: 25%;
+}
+.context .text_wrapper::before {
+    left: 25%;
 }
 
 blockquote {
@@ -177,9 +182,14 @@ blockquote {
 }
 .quote .author, .quote .date, .context .author, .context .date {
     font-family: 'Open Sans', sans-serif;
-    text-align: right;
     font-size: smaller;
     width: 90%;
+}
+.quote .author, .quote .date {
+    text-align: right;
+}
+.context .author, .context .date {
+    float: right;
 }
 
 .page.number {
