@@ -42,6 +42,10 @@ tbw.Views.Start = Backbone.View.extend({
         }).dropdown("setting", "transition", "fade");
     },
 
+    page: function(id) {
+        this.subViews["book"].getPage(id);
+    },
+
     hot: function() {
         this.subViews["book"].getHot();
     },

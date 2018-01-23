@@ -8,12 +8,19 @@ extends __Backbone.Router__
 */
 tbw.Router.Router = Backbone.Router.extend({
     routes: {
-        'page:id' : 'openBook',
+        'page/:id' : 'page',
         "hot": "hot",
         "top/:time": "top",
         "new": "new",
         '' : 'start',
         '*default' : 'defaultRoute',
+    },
+
+    page: function(id) {
+        if(!this.view) {
+            this.view = new tbw.Views.Start();
+        }
+        this.view.page(id);
     },
 
     hot: function() {
