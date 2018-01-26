@@ -4,6 +4,7 @@ const Twitter = require("../twitter");
 const Aws = require("../aws");
 const fs = require('fs');
 const showdown = require('showdown');
+const writeFile = require('write');
 
 var corsOptions = {
     origin: 'http://thebestwords.io',
@@ -32,28 +33,23 @@ module.exports = function(app) {
     });
 
     app.get('/post/:id', cors(corsOptions), (req, res) => {
-        var id = req.params.id || "week";
-        var submission = reddit.getSubmission(id, function(data) {
-            res.setHeader('Access-Control-Allow-Credentials', true);
-            res.setHeader('Content-Type', 'application/json');
-            res.send(JSON.stringify(data));
-        });
-    });
-
-    app.get('/feed', (req, res) => {
-        var feed = twitter.getFeed(function(data) {
-            res.setHeader('Access-Control-Allow-Credentials', true);
-            res.setHeader('Content-Type', 'application/json');
-            res.send(JSON.stringify(data));
-        });
-    });
-
-    app.get('/tweet/:id', (req, res) => {
-        var feed = twitter.getTweet(req.params.id, function(data) {
-            console.log("/tweet " + req.params.id);
-            res.setHeader('Access-Control-Allow-Credentials', true);
-            res.setHeader('Content-Type', 'application/json');
-            res.send(JSON.stringify(data));
+        var id = req.params.id;
+        fs.exists('cache/posts/' + id + '.json', function(exists) {
+            if(exists) {
+                fs.readFile('cache/posts/' + id + '.json', 'utf8', function(err, data) {
+                    res.setHeader('Access-Control-Allow-Credentials', true);
+                    res.setHeader('Content-type', 'text/json');
+                    res.send(data);
+                });
+            }
+            else {
+                var submission = reddit.getSubmission(id, function(data) {
+                    writeFile('cache/posts/' + id + '.json', JSON.stringify(data));
+                    res.setHeader('Access-Control-Allow-Credentials', true);
+                    res.setHeader('Content-Type', 'application/json');
+                    res.send(JSON.stringify(data));
+                });
+            }
         });
     });
 

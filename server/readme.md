@@ -2,7 +2,7 @@
  _____ _       _____         _   _ _ _           _       _
 |_   _| |_ ___| __  |___ ___| |_| | | |___ ___ _| |___  |_|___
   | | |   | -_| __ -| -_|_ -|  _| | | | . |  _| . |_ -|_| | . |
-  |_| |_|_|___|_____|___|___|_| |_____|___|_| |___|___|_|_|___|v14.5.2
+  |_| |_|_|___|_____|___|___|_| |_____|___|_| |___|___|_|_|___|v14.6
 ```
 ---
 By gammagames  
@@ -35,5 +35,4 @@ A nodejs server hosted on amazon aws elastic beanstalk. Downloads a new cache fr
 ⭐ api.thebestwords.io/top/:time - view the top posts from the subreddit  
 &nbsp;&nbsp;&nbsp;&nbsp;🕒  :time - day | week | month | year | all  
 📃 api.thebestwords.io/post/:id - json for a tweet with a given id  
-🐦 api.thebestwords.io/tweet/:id - json for a tweet with a given id  
 🐄 api.thebestwords.io/cow/:id? - cowsay for a tweet with an (optional) given id (if none provided, pulls random from a list)

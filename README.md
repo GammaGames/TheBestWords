@@ -36,7 +36,6 @@ Servers:
 ⭐ api.thebestwords.io/top/:time - view the top posts from the subreddit  
 &nbsp;&nbsp;&nbsp;&nbsp;🕒  :time - day | week | month | year | all  
 📃 api.thebestwords.io/post/:id - json for a tweet with a given id  
-🐦 api.thebestwords.io/tweet/:id - json for a tweet with a given id  
 🐄 api.thebestwords.io/cow/:id? - cowsay for a tweet with an (optional) given id  
 &nbsp;&nbsp;&nbsp;&nbsp;(if none provided, pulls random from a list)
 
