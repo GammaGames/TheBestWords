@@ -106,6 +106,7 @@ tbw.Views.Start = Backbone.View.extend({
     },
 
     aboutModal: function() {
+        this.subViews["book"].closeBook();
         if(this.subViews["about"]) {
             this.subViews["about"].remove();
         }

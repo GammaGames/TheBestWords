@@ -35,6 +35,7 @@ tbw.Views.Book = Backbone.View.extend({
             height: "100%",
             pagePadding: 0,
             pageNumbers: false,
+            speed: 500,
             manual:   false,
             overlays: true,
             hovers:   true,
