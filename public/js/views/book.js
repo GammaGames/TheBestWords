@@ -83,15 +83,13 @@ tbw.Views.Book = Backbone.View.extend({
         this.closeBook();
         setTimeout(function() {
             that.removeSubViews();
-        }, 750);
+            _.each(_.clone(that.collection.models), function(model) {
+                that.collection.remove(model);
+            });
+        }, 50);
         setTimeout(function() {
             $("#page_loader").addClass("active");
             var model;
-            if(this.collection) {
-                while (model = this.collection.first()) {
-                    model.destroy();
-                }
-            }
 
             model = new tbw.Models.Submission({id: id});
             model.fetch({reset: true});

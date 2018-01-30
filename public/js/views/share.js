@@ -40,11 +40,13 @@ tbw.Views.Share = Backbone.View.extend({
     },
 
     showModal() {
+        var that = this;
         $("#share_modal").modal("show");
         $("#copy_button").on("click", function() {
             $("#copy_button").popup({on: "manual", position: "bottom right"}).popup("show");
             setTimeout(function() {
-                $("#copy_button").popup("hide")
+                $("#copy_button").popup("hide");
+                that.hideModal();
             }, 1250);
         });
         this.lastRoute = Backbone.history.getFragment();
