@@ -4,6 +4,7 @@
     "description": "tbw",
     "main": "app.js",
     "dependencies": {
+        "autolinker": "^1.6.0",
         "config": "^1.29.1",
         "cors": "^2.8.4",
         "cowsay": "^1.2.1",

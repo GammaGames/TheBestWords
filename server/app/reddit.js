@@ -2,6 +2,7 @@ var snoowrap = require('snoowrap');
 var showdown = require('showdown');
 var moment = require('moment');
 var parse = require('twitter-url-parser');
+var Autolinker = require( 'autolinker' );
 const Twitter = require("./twitter");
 var forAsync = require('for-async');
 
@@ -15,6 +16,7 @@ function Reddit() {
         refreshToken: global.redditAuth.get("refreshToken")
     });
     this.twitter = new Twitter();
+    this.autolinker = new Autolinker({truncate: { length: 32, location: 'smart' }, phone: false});
 }
 
 method.getTop = function(time, callback) {
@@ -55,11 +57,11 @@ method.getSubmission = function(id, callback) {
 
 method.parseSubmission = function(submission, callback) {
     var that = this;
-    submission.expandReplies({limit: 20, depth: 1}).then(submission => {
+    submission.expandReplies({limit: Infinity, depth: 1}).then(submission => {
         var post = {
             domain: submission.domain,
             num_reports: submission.num_reports,
-            selftext_html: submission.selftext_html,
+            selftext_html: that.autolinker.link(autosubmission.selftext_html),
             selftext: submission.selftext,
             id: submission.id,
             username: submission.author.name,
@@ -92,11 +94,11 @@ method.parseSubmissions = function(submissions, callback) {
     forAsync(submissions, function(submission) {
         return new Promise(function(resolve){
             if(submission.domain == "twitter.com") {
-                submission.expandReplies({limit: 20, depth: 1}).then(submission => {
+                submission.expandReplies({limit: Infinity, depth: 1}).then(submission => {
                     var post = {
                         domain: submission.domain,
                         num_reports: submission.num_reports,
-                        selftext_html: submission.selftext_html,
+                        selftext_html: that.autolinker.link(submission.selftext_html),
                         selftext: submission.selftext,
                         id: submission.id,
                         username: submission.author.name,
@@ -135,6 +137,7 @@ method.parseSubmissions = function(submissions, callback) {
 }
 
 method.getSubmitterComments = function(comments) {
+    var that = this;
     var converter = new showdown.Converter();
     var results = [];
     comments.forEach(function(comment) {
@@ -143,7 +146,7 @@ method.getSubmitterComments = function(comments) {
                 gilded: comment.gilded,
                 author: comment.author.name,
                 score: comment.score,
-                body: converter.makeHtml((comment.body.toLowerCase().match(/^.{0,2}context.{0,2}/) ? "" : "Context: ") + comment.body).replace(/\n/g, ""),
+                body: that.autolinker.link(converter.makeHtml((comment.body.toLowerCase().match(/^.{0,2}context.{0,2}/) ? "" : "Context: ") + comment.body).replace(/\n/g, "")),
                 permalink: comment.permalink,
                 num_reports: comment.num_reports,
                 created_utc: comment.created_utc,

@@ -1,5 +1,6 @@
 var twitternpm = require('twitter');
 var moment = require('moment');
+var Autolinker = require( 'autolinker' );
 
 var method = Twitter.prototype;
 
@@ -9,22 +10,7 @@ function Twitter() {
         consumer_secret: global.twitterAuth.get("consumer_secret"),
         bearer_token: global.twitterAuth.get("bearer_token")
     });
-}
-
-method.getFeed = function(callback) {
-    var that = this;
-    this.startTime = moment();
-    console.log("Twitter feed: " + this.startTime.format("MM-DD-YYYY H:m:s"));
-
-    var params = {screen_name: 'realDonaldTrump', tweet_mode: "extended"};
-    this.t.get('statuses/user_timeline', params, function(error, tweets, response) {
-        if (!error) {
-            if(typeof callback != 'undefined') {
-                that.parseTweets(tweets, callback);
-                // callback(tweets);
-            }
-        }
-    });
+    this.autolinker = new Autolinker({truncate: { length: 32, location: 'smart' }, phone: false});
 }
 
 method.getTweet = function(id, callback) {
@@ -42,6 +28,28 @@ method.getTweet = function(id, callback) {
         }
         else {
             console.log(error);
+            if(typeof callback != 'undefined') {
+                // console.log(moment().diff(that.startTime) / 1000 + ' seconds');
+                callback({
+                    "created_at": "Sat Aug 09 07:30:50 +0000 2014",
+                    "id_str": "498008486551506945",
+                    "full_text": "We need a President who isn't a laughing stock to the entire World. We need a truly great leader, a genius at strategy and winning. Respect!",
+                    "entities": {
+                        "hashtags": [],
+                        "symbols": [],
+                        "user_mentions": [],
+                        "urls": []
+                    },
+                    "user": {
+                        "id": 25073877,
+                        "name": 25073877,
+                        "screen_name": "realDonaldTrump",
+                        "location": "Washington, DC",
+                        "description": "45th President of the United States of America🇺🇸",
+                        "verified": true
+                    }
+                });
+            }
         }
     });
 }
@@ -63,7 +71,7 @@ method.parseTweet = function(tweet){
     var twit = {
         created_at: tweet.created_at,
         id_str: tweet.id_str,
-        full_text: tweet.full_text,
+        full_text: this.autolinker.link(tweet.full_text),
         entities: tweet.entities,
         user: {
             id: tweet.user.id,

@@ -8,8 +8,8 @@
 By gammagames  
 Easily see trump's hypocrisy in a book style featuring posts taken from [/r/trumpcriticizestrump](https://www.reddit.com/r/TrumpCriticizesTrump/), highlighting the tweets and context for the lies  
 
-![preview1](preview1.jpg "The greeting page")
-![preview2](preview2.jpg "A sample tweet page")
+![preview1](img/preview1.jpg "The greeting page")
+![preview2](img/preview2.jpg "A sample tweet page")
 
 Frontend:
 ======

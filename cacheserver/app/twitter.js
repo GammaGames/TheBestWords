@@ -13,22 +13,6 @@ function Twitter() {
     this.autolinker = new Autolinker({truncate: { length: 32, location: 'smart' }, phone: false});
 }
 
-method.getFeed = function(callback) {
-    var that = this;
-    this.startTime = moment();
-    console.log("Twitter feed: " + this.startTime.format("MM-DD-YYYY H:m:s"));
-
-    var params = {screen_name: 'realDonaldTrump', tweet_mode: "extended"};
-    this.t.get('statuses/user_timeline', params, function(error, tweets, response) {
-        if (!error) {
-            if(typeof callback != 'undefined') {
-                that.parseTweets(tweets, callback);
-                // callback(tweets);
-            }
-        }
-    });
-}
-
 method.getTweet = function(id, callback) {
     var that = this;
     // this.startTime = moment();
