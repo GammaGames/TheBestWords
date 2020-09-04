@@ -10,7 +10,7 @@
         "moment": "^2.20.1",
         "node-cron": "^1.2.1",
         "s3": "^4.4.0",
-        "showdown": "^1.8.6",
+        "showdown": "^1.9.1",
         "snoowrap": "^1.15.2",
         "twitter": "^1.7.1",
         "twitter-url-parser": "0.0.1",
