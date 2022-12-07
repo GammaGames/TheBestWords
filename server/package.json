@@ -8,7 +8,7 @@
         "config": "^1.29.1",
         "cors": "^2.8.4",
         "cowsay": "^1.2.1",
-        "express": "^4.16.2",
+        "express": "^4.17.3",
         "express-healthcheck": "^0.1.0",
         "for-async": "^1.0.1",
         "moment": "^2.29.2",
